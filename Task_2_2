@@ -1,0 +1,42 @@
+public class LinkedList2 {
+    static Node head;
+    public static class Node {
+        int data;
+        Node next;
+        Node(int data) {
+            this.data = data;
+            next = null;
+        }
+    }
+    public int findElement(int k){
+        Node first = head;
+        Node second = head;
+        Node result;
+        int data_res = 0;
+        
+        for(int i = 0; i < k; i++) {
+            first = first.next;
+        }
+        while (first.next != null && second.next != null) {
+            first = first.next;
+            second = second.next;
+        }
+        result = second;
+        data_res = result.data;
+        
+        return data_res;
+    }
+    public static void main(String[] args) {
+        LinkedList2 list = new LinkedList2();
+        list.head = new Node(1);
+        list.head.next = new Node(2);
+        list.head.next.next = new Node(3);
+        list.head.next.next.next = new Node(4);
+        list.head.next.next.next.next = new Node(5);
+        list.head.next.next.next.next.next = new Node(6);
+
+        int res = list.findElement(2);
+        System.out.println("Element is : " + res);
+
+    }
+}
