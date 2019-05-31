@@ -1,0 +1,54 @@
+import java.util.EmptyStackException;
+
+public class Stack {
+    private static StackNode top;
+    private static class StackNode{
+        static int min_val = Integer.MAX_VALUE;
+        int[] data;
+        StackNode next;
+        StackNode(int[] data) {
+            this.data = data;
+            next = null;
+        }
+    }
+    private void push(int[] data){
+        StackNode newNode = new StackNode(data);
+        newNode.next = top;
+        top = newNode;
+        if(top.data[0] < StackNode.min_val){
+            StackNode.min_val = data[0];
+            data[1] = data[0];
+        }
+    }
+    private int pop(){
+        if(top == null) throw new EmptyStackException();
+        int item = top.data[0];
+        top = top.next;
+        StackNode.min_val = top.data[1];
+        return item;
+    }
+    private int min(){
+        return top.data[1];
+    }
+    private void printList(StackNode node) {
+        while (node != null) {
+            System.out.print(node.data[0] + " ");
+            node = node.next;
+        }
+    }
+    public static void main(String[] args) {
+        Stack myStack = new Stack();
+        myStack.push(new int[]{6,0});
+        myStack.push(new int[]{5,0});
+        myStack.push(new int[]{4,0});
+        myStack.push(new int[]{3,0});
+        myStack.push(new int[]{2,0});
+        myStack.push(new int[]{1,0});
+        myStack.printList(top);
+        System.out.println(" ");
+        System.out.println("min value = " + myStack.min());
+        myStack.pop();
+        System.out.println("min value = " + myStack.min());
+
+    }
+}
