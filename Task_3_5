@@ -1,0 +1,26 @@
+public class Sorting {
+    public static Stack<Integer> sort(Stack<Integer> origin_stack){
+        Stack<Integer> temp_stack = new Stack<Integer>();
+        while(!origin_stack.isEmpty()){
+            int temp = origin_stack.pop();
+            while(!temp_stack.isEmpty() && temp_stack.peek() > temp){
+                origin_stack.push(temp_stack.pop());
+            }
+            temp_stack.push(temp);
+        }
+        return temp_stack;
+    }
+    public static void main(String args[]){
+        Stack<Integer> input = new Stack<Integer>();
+        input.push(1);
+        input.push(6);
+        input.push(2);
+        input.push(12);
+        input.push(9);
+        Stack<Integer> sorted=sort(input);
+        System.out.println("Sorted");
+        while (!sorted.empty()){
+            System.out.print(sorted.pop()+" ");
+        }
+    }
+}
